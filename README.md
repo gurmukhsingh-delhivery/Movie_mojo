@@ -1,1 +1,1 @@
-# demo_project
+hoe to setup server for this application
