@@ -14,7 +14,7 @@ export default function Home() {
     <>
        <Navbar />
       {/* <CardGrid cards = {cards} /> */}
-      <MovieGrid />
+      <MovieGrid movies = {movies} />
 
     </>
     

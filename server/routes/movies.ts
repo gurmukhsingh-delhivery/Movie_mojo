@@ -10,6 +10,7 @@ export class movieRoutes {
 
   public setRoutes() {
     this.router.get("/",movieController.getMovies);
+    this.router.get("/:id",movieController.get)
     this.router.post("/",movieController.postMovie);
     this.router.delete("/:id",movieController.deleteMovie);
   }

@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import app from "./app";
+import * as dotEnv from "dotenv";
 
 
 class App {
@@ -24,7 +25,7 @@ class App {
     this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
     // Enables cors
     this.app.use(cors());
-    
+    dotEnv.config();
   }
   
   private setControllers() {

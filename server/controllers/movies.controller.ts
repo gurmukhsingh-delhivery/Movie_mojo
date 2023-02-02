@@ -12,6 +12,18 @@ class MyController {
       .catch(err => res.send(err));
   }
 
+  public static async get(req: Request, res: Response) {
+    const id  = req.params.id;
+
+    const query = 'SELECT * FROM movies WHERE id = ?';
+    const params = [id];
+
+    client.connect()
+    .then(() => client.execute(query,params,{prepare: true}))
+    .then(resp => res.send(resp.rows))
+    .catch(err => res.send(err));
+  }
+
   public static async postMovie(req: Request,res: Response){
     const movie = req.body;
     const query = 'INSERT INTO movies (id, title, releasedate, genre) VALUES (?, ?, ?, ?)';
