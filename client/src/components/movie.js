@@ -9,7 +9,12 @@ const Card = ({movie,id}) => {
 
   return (
 
-    <Link href={`movies/${id}`}>
+    <Link href={{
+      pathname: `movies/${id}`,
+      query : {
+        id : id,
+      }
+    }}>
             {/* <div className="bg-white p-4 rounded-lg shadow-md">
                 <h3 className="text-lg font-medium mb-2">{title}</h3>
                 <p className="text-gray-700">{releaseDate}</p>
