@@ -28,12 +28,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/login": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/css/pages/login.css",
-      "static/chunks/pages/login.js"
-    ],
     "/movies/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

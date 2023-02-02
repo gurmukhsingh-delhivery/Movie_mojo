@@ -8,13 +8,8 @@ const Card = ({movie,id}) => {
   let releaseDate = movie.Released;
 
   return (
+      <>
 
-    <Link href={{
-      pathname: `movies/${id}`,
-      query : {
-        id : id,
-      }
-    }}>
             {/* <div className="bg-white p-4 rounded-lg shadow-md">
                 <h3 className="text-lg font-medium mb-2">{title}</h3>
                 <p className="text-gray-700">{releaseDate}</p>
@@ -38,7 +33,8 @@ const Card = ({movie,id}) => {
                 </div>
               </div>
             </div>
-    </Link>
+
+        </>
 
   )
 }

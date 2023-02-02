@@ -27,6 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const movies_1 = require("./routes/movies");
+const auth_1 = require("./routes/auth");
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
@@ -53,6 +54,8 @@ class App {
     setRoutes() {
         const movie = new movies_1.movieRoutes();
         this.app.use('/movies', movie.router);
+        const auth = new auth_1.authRoutes();
+        this.app.use("/user", auth.router);
     }
 }
 exports.default = new App().app;

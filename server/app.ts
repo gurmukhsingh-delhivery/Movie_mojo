@@ -1,11 +1,13 @@
 import { Application } from "express";
 import { movieRoutes } from "./routes/movies";
+import { authRoutes } from "./routes/auth";
 
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import app from "./app";
 import * as dotEnv from "dotenv";
+
 
 
 class App {
@@ -35,6 +37,10 @@ class App {
   private setRoutes(){
        const movie = new movieRoutes();
        this.app.use('/movies',movie.router)
+
+       const auth = new authRoutes();
+       this.app.use("/user",auth.router)
+       
   }
 
 }

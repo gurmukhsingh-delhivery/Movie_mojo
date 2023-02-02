@@ -371,27 +371,6 @@ self.__RSC_MANIFEST={
       "async": false
     }
   },
-  "/home/delhivery/movie_mojo/Movie_mojo/client/node_modules/tailwindcss/base.css": {
-    "default": {
-      "id": "./node_modules/tailwindcss/base.css",
-      "name": "default",
-      "chunks": []
-    }
-  },
-  "/home/delhivery/movie_mojo/Movie_mojo/client/node_modules/tailwindcss/components.css": {
-    "default": {
-      "id": "./node_modules/tailwindcss/components.css",
-      "name": "default",
-      "chunks": []
-    }
-  },
-  "/home/delhivery/movie_mojo/Movie_mojo/client/node_modules/tailwindcss/utilities.css": {
-    "default": {
-      "id": "./node_modules/tailwindcss/utilities.css",
-      "name": "default",
-      "chunks": []
-    }
-  },
   "/home/delhivery/movie_mojo/Movie_mojo/client/src/app/globals.css": {
     "default": {
       "id": "null",

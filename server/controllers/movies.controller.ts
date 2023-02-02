@@ -49,7 +49,6 @@ class MyController {
     .then(resp => res.send(resp))
     .catch(err => res.send(err));
   }
-
 }
 
 

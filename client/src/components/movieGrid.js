@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import Movie from './movie';
+import Link from 'next/link';
 
 const CardGrid = ({movies}) => {
   // const [data,setData] = useState([]);
@@ -17,7 +18,10 @@ const CardGrid = ({movies}) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {movies.map((movie,ind) => (
-        <Movie key={ind} movie={movie} id  = {ind} />
+        <Link href = {`movies/${ind}`}>
+              <Movie key={ind} movie={movie} id  = {ind} />
+        </Link>
+        
       ))}
     </div>
   )

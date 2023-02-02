@@ -3,22 +3,19 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import MovieAbout from "../../components/movieAbout"
 
-const Post = (props) => {
+const Post = () => {
+    const router = useRouter();
+    // let {id} = router.query;
 
+    let name = router.asPath;
+
+    console.log(name);
     return (
-          <MovieAbout id = {parseInt(props.id)} />
+          <MovieAbout id = {0} />
     )
   
 }
 
-export const getServerSideProps= (context)=> {
-  // console.log(context.query) 
-  return {
-      props: { 
-         id: context.query.id //pass it to the page props
-      }
-  }
-}
 
 
 export default Post;
