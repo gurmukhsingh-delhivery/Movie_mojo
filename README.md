@@ -13,7 +13,7 @@ Requirements : use node version 16.19.0
 Note: whenever you want to run your application , run this docker container in the background
 this could be done by  docker start local-scylla-db
 
-4) clone the repositories from github dev branch using 
+4) clone the repositories from github dev branch using command:  git clone -b dev https://github.com/gurmukhsingh-delhivery/Movie_mojo.git
 5) cd client and then run npm install
 6) cd server and then run npm install
 7) for running the client use npm run dev script
