@@ -29,5 +29,29 @@ class authController {
             // res.send("registered the user");
         });
     }
+    static login(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("got to the login route");
+            const { username, password } = req.body;
+            const query = 'SELECT * FROM USERS WHERE username = ?';
+            const params = [username];
+            client.connect()
+                .then(() => client.execute(query, params, { prepare: true }))
+                .then(resp => {
+                // console.log("sent the data to post route")
+                // res.send(resp.rows);
+                if (resp.rows[0].password == password) {
+                    console.log("correct password");
+                    res.send("user logged in");
+                }
+                else {
+                    console.log("wrong password");
+                    res.render("wrong password or username");
+                }
+            })
+                .catch(err => res.send(err));
+            // res.send("registered the user");
+        });
+    }
 }
 exports.default = authController;

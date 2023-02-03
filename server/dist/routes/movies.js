@@ -13,8 +13,8 @@ class movieRoutes {
     }
     setRoutes() {
         this.router.get("/", movies_controller_1.default.getMovies);
-        this.router.get("/:id", movies_controller_1.default.get);
         this.router.post("/", movies_controller_1.default.postMovie);
+        this.router.get("/:id", movies_controller_1.default.get);
         this.router.delete("/:id", movies_controller_1.default.deleteMovie);
     }
 }

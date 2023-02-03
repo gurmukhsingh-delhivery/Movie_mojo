@@ -13,6 +13,7 @@ class authRoutes {
     }
     setRoutes() {
         this.router.post("/register", auth_controller_1.default.register);
+        this.router.post("/login", auth_controller_1.default.login);
     }
 }
 exports.authRoutes = authRoutes;

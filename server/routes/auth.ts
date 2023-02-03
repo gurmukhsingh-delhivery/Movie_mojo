@@ -10,5 +10,6 @@ export class authRoutes {
 
   public setRoutes() {
     this.router.post("/register",authController.register);
+    this.router.post("/login",authController.login);
   }
 }

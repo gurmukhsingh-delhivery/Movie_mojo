@@ -2,24 +2,29 @@
 import React, { useEffect, useState } from 'react';
 import Movie from './movie';
 import Link from 'next/link';
+import {nanoid} from "nanoid";
 
-const CardGrid = ({movies}) => {
-  // const [data,setData] = useState([]);
-  // useEffect(() =>{
-  //   const fetchData = async () => {
-  //       const response = await fetch('http://localhost:4000/movies/');
-  //       const json = await response.json();
-  //       setData(json);
-  //   };
-  //     fetchData();
-  // },[])
-   
+const  movieGrid = () => {
+  const [data,setData] = useState(null);
+  useEffect(() =>{
+    console.log("use effect")
+    const fetchData = async () => {
+        const response = await fetch('http://localhost:4000/movies/');
+        const json = await response.json();
+        setData(json);
+    };
+      fetchData();
+  },[])
+  
+  // console.log(data);
+  
+  if(!data) return <p>Loading... </p>
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {movies.map((movie,ind) => (
-        <Link href = {`movies/${ind}`}>
-              <Movie key={ind} movie={movie} id  = {ind} />
+      {data.map((movie,ind) => (
+        <Link href = {`movies/${movie.id}`}>
+              <Movie key={ind} movie={movie} />
         </Link>
         
       ))}
@@ -27,4 +32,4 @@ const CardGrid = ({movies}) => {
   )
 }
 
-export default CardGrid;
+export default movieGrid;

@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const connection_1 = require("../db/connection");
+const nanoid_1 = require("nanoid");
+const fetch = require("node-fetch");
 const client = (0, connection_1.getConnection)();
 class MyController {
     static getMovies(req, res) {
@@ -35,15 +37,15 @@ class MyController {
     static postMovie(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const movie = req.body;
-            const query = 'INSERT INTO movies (id, title, releasedate, genre) VALUES (?, ?, ?, ?)';
-            const params = [movie.id, movie.Title, movie.Released, movie.Genre];
+            const query = 'INSERT INTO movies (id,genre,img,releaseDate,title) VALUES (?,?, ?, ?, ?)';
+            const params = [(0, nanoid_1.nanoid)(), movie.Genre, movie.Images[0], '2011-02-03', movie.Title];
             client.connect()
                 .then(() => client.execute(query, params, { prepare: true }))
                 .then(resp => {
                 // console.log("sent the data to post route")
                 res.send("got to the post route");
             })
-                .catch(err => res.send(err));
+                .catch(err => res.send("cant post data"));
         });
     }
     static deleteMovie(req, res) {

@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { getConnection } from '../db/connection';
+import {nanoid} from 'nanoid';
+const fetch = require("node-fetch")
 
 const client = getConnection();
 
@@ -26,8 +28,8 @@ class MyController {
 
   public static async postMovie(req: Request,res: Response){
     const movie = req.body;
-    const query = 'INSERT INTO movies (id, title, releasedate, genre) VALUES (?, ?, ?, ?)';
-    const params = [movie.id, movie.Title, movie.Released, movie.Genre];
+    const query = 'INSERT INTO movies (id,genre,img,releaseDate,title) VALUES (?,?, ?, ?, ?)';
+    const params = [nanoid(),movie.Genre, movie.Images[0], '2011-02-03', movie.Title];
     
     client.connect()
     .then(() => client.execute(query,params,{prepare: true}))
@@ -35,7 +37,8 @@ class MyController {
         // console.log("sent the data to post route")
         res.send("got to the post route")
     })
-    .catch(err => res.send(err));
+    .catch(err => res.send("cant post data"));
+    
   }
 
   public static async deleteMovie(req: Request,res: Response){
@@ -49,6 +52,7 @@ class MyController {
     .then(resp => res.send(resp))
     .catch(err => res.send(err));
   }
+
 }
 
 

@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Card = ({movie,id}) => {
-  let title = movie.Title;
-  let img   = movie.Images[0];
-  let genre = movie.Genre;
-  let releaseDate = movie.Released;
+const Movie = ({movie}) => {
+  let title       = movie.title;
+  let img         = movie.img;
+  let genre       = movie.genre;
+  let releaseDate = movie.releaseDate;
+  let id          = movie.id;
 
   return (
       <>
@@ -17,7 +18,7 @@ const Card = ({movie,id}) => {
 
             </div> */}
             
-            <div className="flex justify-center my-8">
+            <div className="flex justify-center my-8 h-full">
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
                 <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
                   <img className="rounded-t-lg" src={img} alt=""/>
@@ -39,4 +40,4 @@ const Card = ({movie,id}) => {
   )
 }
 
-export default Card;
+export default Movie;

@@ -5,13 +5,22 @@ import MovieAbout from "../../components/movieAbout"
 
 const Post = () => {
     const router = useRouter();
-    // let {id} = router.query;
+    const [id,setId] = useState(null);
+    useEffect(()=>{
+        if(!router.isReady) return;
+    
+        // codes using router.query
+        console.log("setting the id")
+        setId(router.query.id);
+    
+    }, [router.isReady]);
 
-    let name = router.asPath;
-
-    console.log(name);
+    if(!id) return <p>Loading...</p>
+    
+    // console.log(id);
     return (
-          <MovieAbout id = {0} />
+    
+          <MovieAbout id = {id} />
     )
   
 }

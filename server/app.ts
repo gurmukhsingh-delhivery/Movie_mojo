@@ -9,7 +9,6 @@ import app from "./app";
 import * as dotEnv from "dotenv";
 
 
-
 class App {
   public app: Application;
 
