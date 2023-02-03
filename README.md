@@ -2,7 +2,7 @@
 
 Requirements : use node version 16.19.0
 
-#installation steps
+# installation steps
 
 1) install docker
 2) docker image of scylladb from docker-hub 
