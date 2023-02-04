@@ -23,7 +23,10 @@ class authController {
         // res.send("posting the data into the scylladb database")
         res.redirect("http://localhost:3001/");
     })
-    .catch(err => res.send(err));
+    .catch(err => {
+      res.redirect("http://localhost:3001/register");
+      // res.send(err)
+    });
     // res.send("registered the user");
   }
    
@@ -46,7 +49,8 @@ class authController {
         }
         else{
           console.log("wrong password")
-          res.send("wrong password or username")
+          res.redirect("http://localhost:3001/login")
+          // res.send("wrong password or username")
         }
 
     })
