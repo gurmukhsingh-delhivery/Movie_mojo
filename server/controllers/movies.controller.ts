@@ -3,9 +3,14 @@ import { getConnection } from '../db/connection';
 import {nanoid} from 'nanoid';
 const fetch = require("node-fetch")
 
+
 const client = getConnection();
 
+
+
 class MyController {
+
+
   public static async getMovies(req: Request, res: Response) {
     //  res.send("get all the movies data")
      client.connect()

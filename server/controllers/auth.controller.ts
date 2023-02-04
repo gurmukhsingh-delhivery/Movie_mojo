@@ -3,8 +3,9 @@ import { getConnection } from '../db/connection';
 import {nanoid} from 'nanoid';
 
 const client = getConnection();
-
 class authController {
+ 
+
   public static async register(req: Request,res: Response){
     const id = nanoid();
     const user = req.body;
@@ -18,7 +19,9 @@ class authController {
     .then(() => client.execute(query,params,{prepare: true}))
     .then(resp => {
         // console.log("sent the data to post route")
-        res.send("posting the data into the scylladb database")
+        // this.nextApp.render(req,res,"/");
+        // res.send("posting the data into the scylladb database")
+        res.redirect("http://localhost:3001/");
     })
     .catch(err => res.send(err));
     // res.send("registered the user");
@@ -39,11 +42,11 @@ class authController {
         
         if(resp.rows[0].password == password){
           console.log("correct password");
-          res.send("user logged in");
+          res.redirect("http://localhost:3001/");
         }
         else{
           console.log("wrong password")
-          res.render("wrong password or username")
+          res.send("wrong password or username")
         }
 
     })

@@ -5,7 +5,6 @@ import { authRoutes } from "./routes/auth";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
-import app from "./app";
 import * as dotEnv from "dotenv";
 
 
@@ -14,6 +13,7 @@ class App {
 
   constructor() {
     this.app = express();
+
     this.setConfig();
     this.setControllers();
     this.setRoutes();
