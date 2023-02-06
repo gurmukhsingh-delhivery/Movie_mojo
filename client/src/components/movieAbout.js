@@ -13,8 +13,8 @@ const MovieAbout = ({id})=>{
             const response = await fetch(`http://localhost:4000/movies/` + `${id}`);
             const json = await response.json();
 
-            console.log(json[0]);
-            setMovie(json[0]);
+            console.log(json.resp[0]);
+            setMovie(json.resp[0]);
         };
           fetchData();
       },[])

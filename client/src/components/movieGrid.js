@@ -11,7 +11,7 @@ const  movieGrid = () => {
     const fetchData = async () => {
         const response = await fetch('http://localhost:4000/movies/');
         const json = await response.json();
-        setData(json);
+        setData(json.resp);
     };
       fetchData();
   },[])

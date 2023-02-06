@@ -1,9 +1,8 @@
 import app from "./app";
+import * as dotEnv from "dotenv";
+dotEnv.config();
 
-const { PORT } = process.env;
-if (!PORT) {
-    process.exit(1);
-  }
+let PORT = process.env.PORT || 4000;
 
 // const PORT = process.env.PORT;
 app.listen(PORT,() => console.log(`Listening on port ${PORT}`));

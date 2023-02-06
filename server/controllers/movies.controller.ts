@@ -3,7 +3,7 @@ import { getConnection } from '../db/connection';
 import {nanoid} from 'nanoid';
 const fetch = require("node-fetch")
 
-
+import {serverResponse,response} from "../utils/serverResponse";
 const client = getConnection();
 
 
@@ -15,8 +15,18 @@ class MyController {
     //  res.send("get all the movies data")
      client.connect()
       .then(() => client.execute('SELECT * FROM movies'))
-      .then(result => res.send(result.rows))
-      .catch(err => res.send(err));
+      .then(result => {
+        let obj:serverResponse = new response(true,result.rows,null);
+
+        let objStr = JSON.stringify(obj);
+        res.send(objStr);
+      })
+      .catch(err => {
+        let obj:serverResponse = new response(false,null,err);
+        let objStr = JSON.stringify(obj);
+  
+        res.send(objStr)
+      });
   }
 
   public static async get(req: Request, res: Response) {
@@ -27,22 +37,42 @@ class MyController {
 
     client.connect()
     .then(() => client.execute(query,params,{prepare: true}))
-    .then(resp => res.send(resp.rows))
-    .catch(err => res.send(err));
+    .then(resp => {
+        let obj:serverResponse = new response(true,resp.rows,null);
+
+        let objStr = JSON.stringify(obj);
+        res.send(objStr);
+    })
+    .catch(err => {
+        let obj:serverResponse = new response(false,null,err);
+        let objStr = JSON.stringify(obj);
+  
+        res.send(objStr)
+    });
   }
 
   public static async postMovie(req: Request,res: Response){
     const movie = req.body;
     const query = 'INSERT INTO movies (id,genre,img,releaseDate,title) VALUES (?,?, ?, ?, ?)';
     const params = [nanoid(),movie.Genre, movie.Images[0], '2011-02-03', movie.Title];
-    
+
+   
     client.connect()
     .then(() => client.execute(query,params,{prepare: true}))
     .then(resp => {
-        // console.log("sent the data to post route")
-        res.send("got to the post route")
+         
+        let obj:serverResponse = new response(true,resp,null);
+
+        let objStr = JSON.stringify(obj);
+        res.send(objStr);
     })
-    .catch(err => res.send("cant post data"));
+    .catch(err => {
+        let obj:serverResponse = new response(false,null,err);
+        let objStr = JSON.stringify(obj);
+
+
+        res.send(objStr);
+    });
     
   }
 
@@ -54,8 +84,18 @@ class MyController {
 
     client.connect()
     .then(() => client.execute(query,params,{prepare: true}))
-    .then(resp => res.send(resp))
-    .catch(err => res.send(err));
+    .then(resp => {
+      let obj:serverResponse = new response(true,resp,null);
+      let objStr = JSON.stringify(obj);
+
+      res.send(objStr)
+    })
+    .catch(err => {
+      let obj:serverResponse = new response(false,null,err);
+      let objStr = JSON.stringify(obj);
+
+      res.send(objStr)
+    });
   }
 
 }
