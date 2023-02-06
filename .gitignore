@@ -4,3 +4,4 @@ client/.next/
 server/node_modules/
 server/constants/
 server/dist/
+*.env

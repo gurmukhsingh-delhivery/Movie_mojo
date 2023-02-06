@@ -21,10 +21,10 @@ class authController {
         // console.log("sent the data to post route")
         // this.nextApp.render(req,res,"/");
         // res.send("posting the data into the scylladb database")
-        res.redirect("http://localhost:3001/");
+        res.redirect("http://localhost:3000/");
     })
     .catch(err => {
-      res.redirect("http://localhost:3001/register");
+      res.redirect("http://localhost:3000/register");
       // res.send(err)
     });
     // res.send("registered the user");
@@ -45,11 +45,11 @@ class authController {
         
         if(resp.rows[0].password == password){
           console.log("correct password");
-          res.redirect("http://localhost:3001/");
+          res.redirect("http://localhost:3000/");
         }
         else{
           console.log("wrong password")
-          res.redirect("http://localhost:3001/login")
+          res.redirect("http://localhost:3000/login")
           // res.send("wrong password or username")
         }
 

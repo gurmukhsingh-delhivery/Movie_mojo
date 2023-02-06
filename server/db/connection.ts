@@ -1,5 +1,10 @@
 import cassandra from 'cassandra-driver';
-import {NODE_IP, DATA_CENTER, KEYSPACE} from "../constants/server.constants"
+
+const {NODE_IP, DATA_CENTER, KEYSPACE} = process.env;
+
+if (!NODE_IP || !DATA_CENTER || !KEYSPACE) {
+  process.exit(1);
+}
 
 // connect to databse
 
