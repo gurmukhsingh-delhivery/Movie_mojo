@@ -11,5 +11,7 @@ export class authRoutes {
   public setRoutes() {
     this.router.post("/register",authController.register);
     this.router.post("/login",authController.login);
+    this.router.post("/editUser",authController.editUser)
+    this.router.get("/logout",authController.logout);
   }
 }

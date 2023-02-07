@@ -9,7 +9,9 @@ const  movieGrid = () => {
   useEffect(() =>{
     console.log("use effect")
     const fetchData = async () => {
-        const response = await fetch('http://localhost:4000/movies/');
+        const response = await fetch('http://localhost:4000/movies/',{
+          credentials: "include",
+        });
         const json = await response.json();
         setData(json.resp);
     };

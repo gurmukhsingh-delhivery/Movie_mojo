@@ -10,7 +10,9 @@ const MovieAbout = ({id})=>{
     useEffect(() =>{
         console.log("useEffect")
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:4000/movies/` + `${id}`);
+            const response = await fetch(`http://localhost:4000/movies/` + `${id}`,{
+            
+            });
             const json = await response.json();
 
             console.log(json.resp[0]);

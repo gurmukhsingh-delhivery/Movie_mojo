@@ -7,7 +7,7 @@ import MovieGrid from '../components/movieGrid'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Movies() {
   return (
     <>
         <MovieGrid />
