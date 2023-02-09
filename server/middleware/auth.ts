@@ -11,7 +11,7 @@ const verifyToken = (req:Request, res:Response, next:NextFunction) => {
   console.log(req.cookies)
   const token = req.cookies.token;
   if (!token) {
-    return res.status(401).json({ message: 'Not authorized' });
+    return res.status(200).json({ message: 'Not authorized' });
   }
 
   // Verify the JWT token
@@ -24,7 +24,7 @@ const verifyToken = (req:Request, res:Response, next:NextFunction) => {
     // req.email = decoded.email;
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Not authorized' });
+    return res.status(200).json({ message: 'Not authorized' });
   }
 };
 

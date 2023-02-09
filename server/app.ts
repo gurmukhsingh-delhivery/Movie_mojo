@@ -22,7 +22,10 @@ class App {
   }
 
   private setConfig() {
-    this.app.use(cors());
+    this.app.use(cors({
+      origin : "http://localhost:3000",
+      credentials: true, // <= Accept credentials (cookies) sent by the client
+    }));
     
     this.app.use(cookieParser());
     // Allows us to receive requests with data in json format

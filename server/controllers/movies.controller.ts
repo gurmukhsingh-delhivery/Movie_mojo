@@ -10,9 +10,7 @@ const client = getConnection();
 
 class MyController {
   public static async getMovies(req: Request, res: Response) {
-    //  res.send("get all the movies data"
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3000')
-    res.set('Access-Control-Allow-Credentials', 'true')
+
      client.connect()
       .then(() => client.execute('SELECT * FROM movies'))
       .then(result => {

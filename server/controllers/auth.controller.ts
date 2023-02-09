@@ -119,25 +119,6 @@ class authController {
     });
   }
 
-  public static async getProfileImage(req: Request, res: Response) {
-    const id  = req.params.id;
-
-    const query = 'SELECT * FROM users WHERE id = ?';
-    const params = [id];
-
-
-    client.connect()
-    .then(() => client.execute(query,params,{prepare: true}))
-    .then(resp => {
-        const avatar = resp.rows[0].avatar;
-        
-      // console.log(typeof(avatar))
-
-    })
-    .catch(err => {
-        res.send(err)
-    });
-  }
 
 
 

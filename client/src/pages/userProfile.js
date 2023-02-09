@@ -18,13 +18,20 @@ const ProfilePage = () => {
 
   useEffect(() =>{
         const fetchData = async () => {
-          const response = await fetch(`http://localhost:4000/user/${Cookies.get('userId')}`);
+          const response = await fetch(`http://localhost:4000/user/${Cookies.get('userId')}`,{
+            credentials:"include"
+          });
           const json = await response.json();
 
           // console.log(json.resp[0]);
-          setUserDetail(json[0]);
-          setName(json[0].name)
-          console.log(json[0]);
+          console.log(json);
+          if(json.message) setUserDetail(json.message)
+          else{
+              setUserDetail(json[0]);
+              setName(json[0].name)
+              console.log(json[0]);
+          }
+          
         };
         fetchData();
   },[])
@@ -40,6 +47,7 @@ const ProfilePage = () => {
 
 
  if(!userDetail) return <p>STILL LOADING </p>
+ if(userDetail == "Not authorized") return <h1>You are not allowed to access this page . First login</h1>
 
   return (
     <div class="h-screen bg-gray-200  dark:bg-gray-800   flex flex-wrap items-center  justify-center  ">

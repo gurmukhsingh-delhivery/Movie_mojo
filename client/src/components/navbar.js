@@ -22,10 +22,11 @@ export default function Navbar(){
            <nav className="bg-gray-900 text-white p-4 flex justify-between items-center">
             <a href="#" className="font-medium">My App</a>
             <div className="hidden md:flex">
-             
+                
                 {flag ?  <Link href="/register" className="px-4 py-2 mr-4">Register</Link>: null}
 
                 {!flag ? <ul>
+                    <Link href="/movies" className="px-4 py-2">Home</Link>
                     <Link href="http://localhost:4000/user/logout" className="px-4 py-2">Logout</Link>
                     <Link href="/userProfile">user</Link>
                    </ul>:null }
