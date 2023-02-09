@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react'
 
 export default function Navbar(){
 
-    if(typeof window !== 'undefined') console.log(document.cookie);
+    // if(typeof window !== 'undefined') console.log(document.cookie);
 
     const [flag,setFlag] = useState(true);
     useEffect(()=>{
 
        if(typeof window != "undefined" && document.cookie) setFlag(false);
        else setFlag(true);
+
+    //    console.log("user id is   " ,Cookies.get('userId'));
 
     } ,[])
 
@@ -23,7 +25,10 @@ export default function Navbar(){
              
                 {flag ?  <Link href="/register" className="px-4 py-2 mr-4">Register</Link>: null}
 
-                {!flag ? <Link href="http://localhost:4000/user/logout" className="px-4 py-2">Logout</Link>:null}
+                {!flag ? <ul>
+                    <Link href="http://localhost:4000/user/logout" className="px-4 py-2">Logout</Link>
+                    <Link href="/userProfile">user</Link>
+                   </ul>:null }
             </div>
             <button className="md:hidden p-1 border border-white rounded-full">
                 <svg className="fill-current text-white" viewBox="0 0 24 24">

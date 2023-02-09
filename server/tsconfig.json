@@ -8,5 +8,5 @@
 "esModuleInterop": true,                           "experimentalDecorators": true,                           "emitDecoratorMetadata": true                         
 },                         
 "exclude": ["node_modules","src/**/*.ts"],                         
-"include": ["constants/**/*.ts","controllers/**/*.ts","db/**/*.ts","routes/**/*.ts","app.ts","server.ts"]
+"include": ["constants/**/*.ts","controllers/**/*.ts","db/**/*.ts","routes/**/*.ts","app.ts","server.ts","ProfileImages/** "]
 }

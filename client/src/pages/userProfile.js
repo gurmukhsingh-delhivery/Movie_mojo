@@ -1,37 +1,45 @@
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import Cookies from 'js-cookie';
 
 import "tailwindcss/base.css";
 import "tailwindcss/components.css";
 import "tailwindcss/utilities.css";
 
 const ProfilePage = () => {
-  
-  const [isEditable, setIsEditable] = useState(false);
-//   const [details,setDetails] = useState({
-//     name:"Gurmukh Singh",
-//   });
 
+  const [isEditable,setIsEditable] = useState(false);
   const [name,setName] = useState("Gurmukh Singh")
-  const [profileImage,setProfileImage] = useState()
 
-  const handleInputChange = (event) =>{
-    setName({
-        ...name,[event.target.name] : event.target.value
-    })
-  }
+  const [userDetail,setUserDetail] = useState(null);
+  const [profileImage,setProfileImage] = useState(null);
+
+  useEffect(() =>{
+        const fetchData = async () => {
+          const response = await fetch(`http://localhost:4000/user/${Cookies.get('userId')}`);
+          const json = await response.json();
+
+          // console.log(json.resp[0]);
+          setUserDetail(json[0]);
+          setName(json[0].name)
+          console.log(json[0]);
+        };
+        fetchData();
+  },[])
 
   const handleEditClick = async (event) => {
-    // console.log(event.target.innerHTML);
+    console.log(event.target.innerHTML);
 
-   if(event.target.innerHTML == "Edit"){
-      console.log("make  a request to change username")
-   }
-
+    if(event.target.innerHTML === "Save"){
+      document.getElementById('theForm').submit();
+    }
     setIsEditable(!isEditable);
   };
 
+
+ if(!userDetail) return <p>STILL LOADING </p>
 
   return (
     <div class="h-screen bg-gray-200  dark:bg-gray-800   flex flex-wrap items-center  justify-center  ">
@@ -46,36 +54,40 @@ const ProfilePage = () => {
         </div>
         <div class="flex justify-center px-5  -mt-12">
 
-        {isEditable? <input
-               type="file"
-               accept="image/png, image/jpeg" />
+        {isEditable? 
+                        <form id = "theForm" enctype="multipart/form-data" action= {`http://localhost:4000/user/editUser/${userDetail.id}`} className= "mt-20" method="POST">
+                            <input type="file" name="avatar"/>
+                            <input
+                                type="text"
+                                name = "name"
+                                value = {name}
+                                onChange={e => setName(e.target.value)}
+                                  />
+
+                             <input type="hidden" name="user" value={JSON.stringify(userDetail)} />
+                        </form>
                :
-               <img
-                class="h-32 w-32 bg-white p-2 rounded-full   "
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
-                alt=""
-              />
+
+               <div>
+                      <img
+                          class="h-32 w-32 bg-white p-2 rounded-full   "
+                          src={`http://localhost:4000/${userDetail.avatar}`}
+                          alt=""
+                        />
+
+                      <h2>Name: {name}</h2>
+               </div> 
             }
+
+               
           
         </div>
         <div class=" ">
           <div class="text-center px-14">
 
-            {isEditable? <input
-               type="text"
-               value={name}
-               onChange={e => handleInputChange}   />
-               :
-               <h2 class="text-gray-800 text-3xl font-bold">{name}</h2>
-            }
+            <h5  >Email : {userDetail.email}</h5>
+            <h5  >Date of birth : {userDetail.dob}   </h5>
             
-            <a
-              class="text-gray-400 mt-2 hover:text-blue-500"
-              href="https://www.instagram.com/immohitdhiman/"
-              target="BLANK()"
-            >
-              @gurmukhnirman123
-            </a>
             <p class="mt-2 text-gray-500 text-sm">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text

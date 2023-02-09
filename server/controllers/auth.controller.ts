@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import { getConnection } from '../db/connection';
 import {nanoid} from 'nanoid';
 import {hashPassword,validatePassword,generateToken,verifyToken} from "../utils/authFxns";
-import multer from "multer";
+import path from "path"
+
 
 const client = getConnection();
 class authController {
@@ -71,6 +72,9 @@ class authController {
       console.log("token is  ", token);
       res.cookie("token", token, { maxAge: 86400000, httpOnly: false });
 
+      const id = resp.rows[0].id;
+      res.cookie("userId",id,{maxAge:86400000,httpOnly: false})
+
       // res.status(200).send("successful login")
       res.redirect("http://localhost:3000/movies");
     } catch (err) {
@@ -82,25 +86,79 @@ class authController {
   public static async logout(req: Request, res: Response) {
     console.log("got to the logout route");
     res.clearCookie("token");
+    res.clearCookie("userId");
 
     res.redirect("http://localhost:3000/");
   }
 
-  public static async editUser(req: Request, res: Response) {
-    // console.log("got to the logout route");
-
-    const storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, "userProfile");
-      },
-      filename: function (req, file, cb) {
-        cb(null, file.originalname);
-      },
+  public static async getAllUsers(req: Request, res: Response) {
+    client.connect()
+    .then(() => client.execute('SELECT * FROM movies'))
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      res.send(err)
     });
+  }
 
-    const upload = multer({ storage: storage });
+  public static async getUser(req: Request, res: Response) {
+    const id  = req.params.id;
+
+    const query = 'SELECT * FROM users WHERE id = ?';
+    const params = [id];
+
+
+    client.connect()
+    .then(() => client.execute(query,params,{prepare: true}))
+    .then(resp => {
+        res.send(resp.rows);
+    })
+    .catch(err => {
+        res.send(err)
+    });
+  }
+
+  public static async getProfileImage(req: Request, res: Response) {
+    const id  = req.params.id;
+
+    const query = 'SELECT * FROM users WHERE id = ?';
+    const params = [id];
+
+
+    client.connect()
+    .then(() => client.execute(query,params,{prepare: true}))
+    .then(resp => {
+        const avatar = resp.rows[0].avatar;
+        
+      // console.log(typeof(avatar))
+
+    })
+    .catch(err => {
+        res.send(err)
+    });
+  }
+
+
+
+  public static async editUser(req: Request, res: Response) {
+    console.log(req.file,req.body);
     
-    res.send("got to the editUser route");
+    const id  = req.params.id;
+    const query = "update users set name = ?,avatar = ? where id = ?";
+    const params = [req.body.name,req.file ? req.file.filename: null,id];
+
+    
+    try{
+        await client.connect();
+        const resp = await client.execute(query, params, { prepare: true });
+
+        // res.send("data changed in the database");
+        res.redirect("http://localhost:3000/userProfile")
+    }
+    catch(error){
+          res.send(error);
+    }
   }
 }
 
