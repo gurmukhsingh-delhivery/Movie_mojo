@@ -47,7 +47,10 @@ const ProfilePage = () => {
 
 
  if(!userDetail) return <p>STILL LOADING </p>
- if(userDetail == "Not authorized") return <h1>You are not allowed to access this page . First login</h1>
+ if(userDetail == "Not authorized"){
+  const router = useRouter();
+  router.push("/login")
+ }
 
   return (
     <div class="h-screen bg-gray-200  dark:bg-gray-800   flex flex-wrap items-center  justify-center  ">

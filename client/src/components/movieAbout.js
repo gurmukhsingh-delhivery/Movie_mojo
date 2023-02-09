@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import Movie from './movie';
 import moviesData  from "../data/movies";
+import { useRouter } from 'next/router';
 
 
 const MovieAbout = ({id})=>{
     // console.log(id);
     const [movie,setMovie] = useState(null);
+    const router = useRouter();
     useEffect(() =>{
         console.log("useEffect")
         const fetchData = async () => {
@@ -19,7 +21,9 @@ const MovieAbout = ({id})=>{
                 setMovie(json.resp[0]);
                 console.log(movie)
             }
-            else setMovie(json.message);
+            else{
+                router.push("/login")
+            }
 
             // console.log(json.resp[0]);
             // setMovie(json.resp[0]);
@@ -28,7 +32,7 @@ const MovieAbout = ({id})=>{
       },[])
 
     if(!movie) return <p>STILL LOADING </p>
-    if(movie == "Not authorized") return <h1>You are not allowed to access this page . First login</h1>
+    // if(movie == "Not authorized") return <h1>You are not allowed to access this page . First login</h1>
 
     console.log(movie);
 

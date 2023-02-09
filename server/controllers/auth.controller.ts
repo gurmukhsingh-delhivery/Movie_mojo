@@ -123,11 +123,15 @@ class authController {
 
 
   public static async editUser(req: Request, res: Response) {
-    console.log(req.file,req.body);
+    // console.log(req.file,req.body);
     
     const id  = req.params.id;
+
+    const user = await JSON.parse(req.body.user)
+    // console.log(user)
+
     const query = "update users set name = ?,avatar = ? where id = ?";
-    const params = [req.body.name,req.file ? req.file.filename: null,id];
+    const params = [req.body.name,req.file ? req.file.filename: user.avatar,id];
 
     
     try{
