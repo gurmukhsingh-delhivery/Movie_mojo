@@ -54,11 +54,10 @@ const  movieGrid = () => {
 
   return (
     <>
-          <div className="button mt-20" style={{display:"flex",justifyContent:"center"}}>
-             <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded' onClick={handleClick}>{sortAscending? "ASCENDING" : "DESCENDING"}</button>
-          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <p className='inline-block float-right mt-5' style={{marginRight:"40px"}}> sort by.. <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded' onClick={handleClick}>{sortAscending? "LOWEST RATING" : "HIGHEST RATING"}</button>  </p> 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-20">
+             
             {data.map((movie,ind) => (
               <Link href = {`movies/${movie.id}`}>
                     <Movie key={ind} movie={movie} />

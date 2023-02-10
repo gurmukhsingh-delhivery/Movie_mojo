@@ -30,8 +30,8 @@ export default function Navbar(){
 
                 {!flag ? <ul>
                     <Link href="/movies" className="px-4 py-2">Home</Link>
-                    <Link href="http://localhost:4000/user/logout" className="px-4 py-2">Logout</Link>
                     <Link href="/userProfile">Profile</Link>
+                    <Link href="http://localhost:4000/user/logout" className="px-4 py-2">Logout</Link>
                    </ul>:null }
             </div>
             <button className="md:hidden p-1 border border-white rounded-full">
