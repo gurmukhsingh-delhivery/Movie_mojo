@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.js", "src/pages/register2.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.jsx", "src/pages/register2.js"],
   "exclude": ["node_modules"]
 }

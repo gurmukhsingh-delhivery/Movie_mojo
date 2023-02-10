@@ -14,5 +14,7 @@ export class movieRoutes {
     this.router.post("/",verifyToken,movieController.postMovie);
     this.router.get("/:id",verifyToken,movieController.get)
     this.router.delete("/:id",verifyToken,movieController.deleteMovie);
+    this.router.post("/ratings",movieController.postRating);
+    this.router.post("/getColor",movieController.getColor);
   }
 }

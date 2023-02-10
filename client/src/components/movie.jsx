@@ -8,6 +8,7 @@ const Movie = ({movie}) => {
   let releaseDate = movie.releaseDate;
   let id          = movie.id;
 
+
   return (
       <>
 
