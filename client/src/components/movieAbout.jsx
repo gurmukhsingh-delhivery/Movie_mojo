@@ -158,10 +158,13 @@ const MovieAbout = ({id})=>{
                 </li>
               </ul>
 
-              <div id = "ratings" className='mt-16'>
-                    <p className="rating">Rate this post: </p>
-                    <i className="fa-solid fa-thumbs-up mx-10 fa-xl" style={{color: upvoteColor}} id='upvote' onClick={handleClick}></i>
-                    <i className="fa-solid fa-thumbs-down mx-10 fa-xl" style={{color: downvoteColor}} id = "downvote" onClick={handleClick}></i>
+              <div id = "ratings" className='mt-8'>
+                    <p className="rating inline">Rate this post: </p>
+                    <div className="rating inline">
+                        <i className="fa-solid fa-thumbs-up mx-4 fa-xl" style={{color: upvoteColor}} id='upvote' onClick={handleClick}></i>
+                        <i className="fa-solid fa-thumbs-down mx-4 fa-xl" style={{color: downvoteColor}} id = "downvote" onClick={handleClick}></i>
+                    </div>
+                   
                   
               </div>
             </div>

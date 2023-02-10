@@ -29,7 +29,7 @@ class authController {
 
       // see if a user with the same email already exists
       if (users.rows.length > 0)
-        return res.status(400).send("user already exists");
+        return res.status(200).send("user already exists");
 
       // console.log(user.password);
 
@@ -43,7 +43,7 @@ class authController {
       const resp = client.execute(query, newParams, { prepare: true });
       res.status(200).send("registered the user in the database");
     } catch (err) {
-      res.status(400).send("not able to register");
+      res.status(200).send("not able to register");
     }
   }
 
@@ -137,7 +137,6 @@ class authController {
     try{
         await client.connect();
         const resp = await client.execute(query, params, { prepare: true });
-
         // res.send("data changed in the database");
         res.redirect("http://localhost:3000/userProfile")
     }

@@ -142,7 +142,7 @@ const Register = ()=>{
                     value={formData.name}
                     onChange={handleInputChange}
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    autocomplete="off"
+                    autoComplete="off"
                     required=""
                   />
                 </div>
@@ -161,7 +161,7 @@ const Register = ()=>{
                     value={formData.email}
                     onChange={handleInputChange}
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    autocomplete="off"
+                    autoComplete="off"
                     required=""
                   />
 
@@ -182,7 +182,7 @@ const Register = ()=>{
                     value={formData.dob}
                     onChange={handleInputChange}
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    autocomplete="off"
+                    autoComplete="off"
                     required=""
                   />
                   {formErrors.dob && <p className='text-red-600'>{formErrors.dob}</p>}
@@ -202,7 +202,7 @@ const Register = ()=>{
                     value={formData.password}
                     onChange={handleInputChange}
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    autocomplete="off"
+                    autoComplete="off"
                     required=""
                   />
 
@@ -223,7 +223,7 @@ const Register = ()=>{
                     id="confirm-password"
                     placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    autocomplete="off"
+                    autoComplete="off"
                     required=""
                   />
 
