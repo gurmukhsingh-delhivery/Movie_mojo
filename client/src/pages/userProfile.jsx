@@ -76,7 +76,7 @@ const ProfilePage = () => {
                                 required
                                   />
 
-                             <input type="hidden" name="user" value={JSON.stringify(userDetail)} />
+                             <input type="hidden" name="user" value={JSON.stringify(userDetail)} required />
                         </form>
                :
 
@@ -87,7 +87,7 @@ const ProfilePage = () => {
                           alt=""
                         />
 
-                      <h2>Name: {name}</h2>
+                      <h2 style={{marginLeft: "15px"}}>Name: {name}</h2>
                </div> 
             }
 
@@ -95,17 +95,11 @@ const ProfilePage = () => {
           
         </div>
         <div class=" ">
-          <div class="text-center px-14">
+          <div className="text-center">
 
             <h5  >Email : {userDetail.email}</h5>
-            <h5  >Date of birth : {userDetail.dob}   </h5>
+            <h5 style={{marginLeft: "-20px"}} >Date of birth : {userDetail.dob}   </h5>
             
-            <p class="mt-2 text-gray-500 text-sm">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s,{" "}
-            </p>
-
             <button className="w-32 mt-4  text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"  onClick={handleEditClick}>
             {isEditable ? "Save" : "Edit"}
           </button>

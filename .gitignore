@@ -1,7 +1,9 @@
 client/node_modules/
 client/.next/
+client/data/
 
 server/node_modules/
 server/constants/
 server/dist/
+server/nodemon.json
 *.env

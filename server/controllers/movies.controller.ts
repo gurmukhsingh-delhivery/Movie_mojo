@@ -10,9 +10,8 @@ const client = getConnection();
 
 class MyController {
   public static async getMovies(req: Request, res: Response) {
-
      client.connect()
-      .then(() => client.execute('SELECT * FROM movies'))
+      .then(() => client.execute('SELECT * FROM newmovies'))
       .then(result => {
         let obj:serverResponse = new response(true,result.rows,null);
 
@@ -30,7 +29,7 @@ class MyController {
   public static async get(req: Request, res: Response) {
     const id  = req.params.id;
 
-    const query = 'SELECT * FROM movies WHERE id = ?';
+    const query = 'SELECT * FROM newmovies WHERE id = ?';
     const params = [id];
 
     client.connect()
@@ -51,8 +50,15 @@ class MyController {
 
   public static async postMovie(req: Request,res: Response){
     const movie = req.body;
-    const query = 'INSERT INTO movies (id,genre,img,releaseDate,title) VALUES (?,?, ?, ?, ?)';
-    const params = [nanoid(),movie.Genre, movie.Images[0], '2011-02-03', movie.Title];
+
+    let img = "";
+    for(let i = 0;i < req.body.Images.length;i = i + 1){
+      if(i == req.body.Images.length - 1) img =  img +  req.body.Images[i];
+      else img = img +  req.body.Images[i] + ",";
+    }
+
+    const query = 'INSERT INTO newmovies (id,genre,img,released,title,writer,plot,imdb,awards,actors,director) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+    const params = [nanoid(),movie.Genre, img, '2011-02-03', movie.Title,movie.Writer,movie.Plot,movie.imdbRating,movie.Awards,movie.Actors,movie.Director];
 
    
     client.connect()
@@ -77,7 +83,7 @@ class MyController {
   public static async deleteMovie(req: Request,res: Response){
     const id  = req.params.id;
 
-    const query = 'DELETE FROM movies WHERE id = ?';
+    const query = 'DELETE FROM newmovies WHERE id = ?';
     const params = [id];
 
     client.connect()
@@ -112,7 +118,7 @@ class MyController {
     const query4 = "select sum(rating) as rating from mapping where movieid = ?"
     const params4 = [req.body.movieId];
 
-    const query5 = "update movies set rating = ? where id = ?"
+    const query5 = "update newmovies set rating = ? where id = ?"
 
     try {
          await client.connect();

@@ -19,14 +19,31 @@ const  movieGrid = () => {
           credentials: "include",
         });
         const json = await response.json();
+        
 
+        // added randomness to the sorting
         if(sortAscending == true){
           json.resp.sort((a,b) =>{
+            if(!a.rating || a.rating < 0) a.rating  = 0;
+            if(!b.rating || b.rating < 0) b.rating  = 0;
+
+             if(a.rating === 0 && b.rating === 0){
+                 var randomArr =  [-1,0,1];
+                 return randomArr[Math.floor(Math.random()*randomArr.length)];
+             }
+
              return a.rating - b.rating;
           })
         }
         else{
           json.resp.sort((a,b) =>{
+            if(!a.rating || a.rating < 0) a.rating  = 0;
+            if(!b.rating || b.rating < 0) b.rating  = 0;
+
+            if(a.rating === 0 && b.rating === 0){
+              var randomArr =  [-1,0,1];
+              return randomArr[Math.floor(Math.random()*randomArr.length)];
+          }
             return b.rating - a.rating;
          })
         }
@@ -47,7 +64,7 @@ const  movieGrid = () => {
      setSortAscending(!sortAscending);
   }
   
-  // console.log(data);
+  console.log(data);
   
   if(!data) return <p>Loading... </p>
   // if(data == "Not authorized") return <h1>You are not allowed to access this page . First login</h1>
