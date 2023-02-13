@@ -1,0 +1,12 @@
+{
+"compilerOptions": { 
+"target": "es6",                           
+"module": "commonjs",                           
+"outDir": "./dist",                           
+"resolveJsonModule": true,                           
+"strict": true,                           
+"esModuleInterop": true,                           "experimentalDecorators": true,                           "emitDecoratorMetadata": true                         
+},                         
+"exclude": ["node_modules","src/**/*.ts"],                         
+"include": ["constants/**/*.ts","controllers/**/*.ts","db/**/*.ts","routes/**/*.ts","app.ts","server.ts","ProfileImages/** "]
+}
