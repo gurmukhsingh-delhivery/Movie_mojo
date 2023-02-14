@@ -10,8 +10,8 @@ export class movieRoutes {
   }
 
   public setRoutes() {
-    this.router.get("/",  movieController.getMovies);
-    this.router.post("/", movieController.postMovie);
+    this.router.get("/",verifyToken,  movieController.getMovies);
+    this.router.post("/",verifyToken, movieController.postMovie);
     this.router.get("/:id",verifyToken,movieController.get)
     this.router.delete("/:id",verifyToken,movieController.deleteMovie);
     this.router.post("/ratings",verifyToken, movieController.postRating);
