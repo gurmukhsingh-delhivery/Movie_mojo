@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { serverUrl } from '../../constants/serverDetails';
 
 import 'tailwindcss/base.css';
 import 'tailwindcss/components.css';
@@ -80,7 +81,7 @@ const Register = ()=>{
         const isValid = validateForm();
         if (isValid) {
           try {
-            const res = await fetch("http://localhost:4000/user/register", {
+            const res = await fetch(`${serverUrl}user/register`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -125,7 +126,7 @@ const Register = ()=>{
               <form
                 class="space-y-4 md:space-y-6"
                 onSubmit={handleFormSubmit}
-                action="http://localhost:4000/user/register"
+                action={`${serverUrl}user/register`}
                 method = "POST"
               >
                 <div>

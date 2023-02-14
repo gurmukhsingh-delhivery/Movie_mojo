@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {nanoid} from "nanoid";
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import { serverUrl } from '../../constants/serverDetails';
 
 const  movieGrid = () => {
   const [data,setData] = useState(null);
@@ -12,17 +13,18 @@ const  movieGrid = () => {
   const router = useRouter();
   useEffect(() =>{
     console.log("use effect")
+    // console.log(serverUrl);
     const fetchData = async () => {
 
         // if(Cookies.get('userId')) setData()
-        const response = await fetch('http://localhost:4000/movies/',{
+        const response = await fetch(`${serverUrl}movies/`,{
           credentials: "include",
         });
         const json = await response.json();
         
 
         // added randomness to the sorting
-        if(sortAscending == true){
+        if(sortAscending == true && json.resp){
           json.resp.sort((a,b) =>{
             if(!a.rating || a.rating < 0) a.rating  = 0;
             if(!b.rating || b.rating < 0) b.rating  = 0;
@@ -35,7 +37,7 @@ const  movieGrid = () => {
              return a.rating - b.rating;
           })
         }
-        else{
+        else if(json.resp){
           json.resp.sort((a,b) =>{
             if(!a.rating || a.rating < 0) a.rating  = 0;
             if(!b.rating || b.rating < 0) b.rating  = 0;

@@ -30,6 +30,7 @@ class App {
     this.app.use(cookieParser());
     // Allows us to receive requests with data in json format
     this.app.use(bodyParser.json({ limit: "50mb" }));
+    this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
     this.app.use(express.static(path.join(__dirname,"/userProfile")))
     // console.log("in app.ts file" ,__dirname);

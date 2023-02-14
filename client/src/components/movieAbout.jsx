@@ -4,6 +4,7 @@ import Movie from './movie';
 import moviesData  from "../data/movies";
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
+import { serverUrl } from '../../constants/serverDetails';
 
 
 const MovieAbout = ({id})=>{
@@ -16,7 +17,7 @@ const MovieAbout = ({id})=>{
     useEffect(() =>{
         console.log("useEffect")
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:4000/movies/` + `${id}`,{
+            const response = await fetch(`${serverUrl}movies/` + `${id}`,{
                 credentials:"include"
             });
             const json = await response.json();
@@ -28,11 +29,12 @@ const MovieAbout = ({id})=>{
                     obj.userId = Cookies.get('userId');
                     obj.movieId = id;
         
-                    const res = await fetch("http://localhost:4000/movies/getColor", {
+                    const res = await fetch(`${serverUrl}movies/getUserRating`, {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json",
                         },
+                        credentials: "include",
                         body: JSON.stringify(obj),
                     });
                     
@@ -103,11 +105,12 @@ const MovieAbout = ({id})=>{
             obj.userId = Cookies.get('userId');
             obj.movieId = id;
 
-            const res = await fetch("http://localhost:4000/movies/ratings", {
+            const res = await fetch(`${serverUrl}movies/ratings`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify(obj),
             });
 

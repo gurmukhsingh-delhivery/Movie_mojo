@@ -36,6 +36,10 @@ const Movie = ({movie}) => {
                       IMDB-RATING : {movie.imdb}
                   </p>
 
+                  <p className="text-gray-700 text-base mb-4">
+                      Our rating : {movie.rating < 0 ? 0: movie.rating}
+                  </p>
+
                   
                 </div>
               </div>
