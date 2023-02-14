@@ -9,6 +9,8 @@ import * as dotEnv from "dotenv";
 import cookieParser from "cookie-parser"
 import path from "path"
 
+import { clientUrl } from "./constants/clientDetails";
+
 
 class App {
   public app: Application;
@@ -23,7 +25,7 @@ class App {
 
   private setConfig() {
     this.app.use(cors({
-      origin : "http://localhost:3000",
+      origin : clientUrl,
       credentials: true, // <= Accept credentials (cookies) sent by the client
     }));
     
