@@ -3,12 +3,10 @@ import Link from 'next/link';
 
 const Movie = ({movie}) => {
   let title       = movie.title;
-  let img         = movie.img.split(",")[0];
+  let img         = movie.img;
   let genre       = movie.genre;
   let releaseDate = movie.releaseDate;
   let id          = movie.id;
-
-  console.log("in movie componenet",movie);
 
 
   return (
@@ -29,15 +27,8 @@ const Movie = ({movie}) => {
                 <div className="p-6">
                   <h5 className="text-gray-900 text-xl font-medium mb-2">{title}</h5>
                   <p className="text-gray-700 text-base mb-4">
-                      {movie.plot}
-                  </p>
-
-                  <p className="text-gray-700 text-base mb-4">
-                      IMDB-RATING : {movie.imdb}
-                  </p>
-
-                  <p className="text-gray-700 text-base mb-4">
-                      Our rating : {movie.rating < 0 ? 0: movie.rating}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae
+                   lacus egestas, eleifend sem vel, lobortis lectus. Nulla id egestas ipsum.
                   </p>
 
                   

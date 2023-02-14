@@ -4,7 +4,6 @@ import Movie from './movie';
 import moviesData  from "../data/movies";
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
-import { serverUrl } from '../../constants/serverDetails';
 
 
 const MovieAbout = ({id})=>{
@@ -17,7 +16,7 @@ const MovieAbout = ({id})=>{
     useEffect(() =>{
         console.log("useEffect")
         const fetchData = async () => {
-            const response = await fetch(`${serverUrl}movies/` + `${id}`,{
+            const response = await fetch(`http://localhost:4000/movies/` + `${id}`,{
                 credentials:"include"
             });
             const json = await response.json();
@@ -29,12 +28,11 @@ const MovieAbout = ({id})=>{
                     obj.userId = Cookies.get('userId');
                     obj.movieId = id;
         
-                    const res = await fetch(`${serverUrl}movies/getUserRating`, {
+                    const res = await fetch("http://localhost:4000/movies/getColor", {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json",
                         },
-                        credentials: "include",
                         body: JSON.stringify(obj),
                     });
                     
@@ -65,8 +63,6 @@ const MovieAbout = ({id})=>{
     // if(movie == "Not authorized") return <h1>You are not allowed to access this page . First login</h1>
 
     console.log(movie);
-    let imageList = movie.img.split(",");
-    // console.log("list of images  ",imageList);
 
     const handleClick = async (event)=>{
         try{
@@ -105,12 +101,11 @@ const MovieAbout = ({id})=>{
             obj.userId = Cookies.get('userId');
             obj.movieId = id;
 
-            const res = await fetch(`${serverUrl}movies/ratings`, {
+            const res = await fetch("http://localhost:4000/movies/ratings", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
-                credentials: "include",
                 body: JSON.stringify(obj),
             });
 
@@ -137,7 +132,7 @@ const MovieAbout = ({id})=>{
           <div className="flex h-full bg-white">
             <div className="w-2/3">
               <img
-                src={imageList[0]}
+                src={movie.img}
                 alt="Image"
                 className="rounded-lg h-full w-full object-fill"
               />
@@ -145,7 +140,13 @@ const MovieAbout = ({id})=>{
             <div className="w-2/3 px-6 py-4">
               <h3 className="text-xl font-bold mb-2">{movie.title}</h3>
               <p className="text-gray-700 mb-4">
-               {movie.plot} 
+                Pellentesque eu cursus eros. Nam dignissim sem a volutpat
+                auctor. Vivamus massa velit, pharetra nec diam at, interdum
+                congue lectus. Vivamus quis sem tincidunt, accumsan dolor non,
+                fermentum magna. Suspendisse scelerisque est nec est tristique,
+                nec venenatis diam placerat. Class aptent taciti sociosqu ad
+                litora torquent per conubia nostra, per inceptos himenaeos.
+                Fusce at tellus vitae ligula pretium convallis eget eu sapien.
               </p>
               <ul className="list-none">
                 <li className="mb-2">
@@ -153,21 +154,7 @@ const MovieAbout = ({id})=>{
                 </li>
                 <li className="mb-2">
                   <span className="font-bold">releaseDate:</span>{" "}
-                  {movie.released}
-                </li>
-                <li className="mb-2">
-                  <span className="font-bold">Actors:</span>{" "}
-                  {movie.actors}
-                </li>
-
-                <li className="mb-2">
-                  <span className="font-bold">Director:</span>{" "}
-                  {movie.director}
-                </li>
-
-                <li className="mb-2">
-                  <span className="font-bold">Awards:</span>{" "}
-                  {movie.awards}
+                  {movie.releasedate}
                 </li>
               </ul>
 

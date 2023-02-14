@@ -3,7 +3,6 @@ import { getConnection } from '../db/connection';
 import {nanoid} from 'nanoid';
 import {hashPassword,validatePassword,generateToken,verifyToken} from "../utils/authFxns";
 import path from "path"
-import { clientUrl } from '../constants/clientDetails';
 
 
 const client = getConnection();
@@ -77,10 +76,10 @@ class authController {
       res.cookie("userId",id,{maxAge:86400000,httpOnly: false})
 
       // res.status(200).send("successful login")
-      res.redirect(`${clientUrl}/movies`);
+      res.redirect("http://localhost:3000/movies");
     } catch (err) {
       // res.status(400).send(err);
-      res.redirect(clientUrl);
+      res.redirect("http://localhost:3000/");
     }
   }
 
@@ -89,7 +88,7 @@ class authController {
     res.clearCookie("token");
     res.clearCookie("userId");
 
-    res.redirect(clientUrl);
+    res.redirect("http://localhost:3000/");
   }
 
   public static async getAllUsers(req: Request, res: Response) {
@@ -139,7 +138,7 @@ class authController {
         await client.connect();
         const resp = await client.execute(query, params, { prepare: true });
         // res.send("data changed in the database");
-        res.redirect(`${clientUrl}/userProfile`)
+        res.redirect("http://localhost:3000/userProfile")
     }
     catch(error){
           res.send(error);
