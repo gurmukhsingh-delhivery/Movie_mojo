@@ -51,10 +51,11 @@ async function createMovies() {
   async function createMapping() {
     const createTableMapping = `
       CREATE TABLE IF NOT EXISTS mapping (
-        id text PRIMARY KEY,
+        id text,
         movieid text,
         rating int,
-        userid text
+        userid text,
+        PRIMARY KEY((movieid),userid,id)
       );
     `;
   
@@ -79,21 +80,4 @@ async function createMovies() {
     }
   }
 
-  async function createMappingIndex() {
-    const mappingIndexUserId = `CREATE INDEX on mapping(userId);`;
-    const mappingIndexMovieId = `CREATE INDEX ON MAPPING(movieId)`;
-  
-    try {
-      await client.execute(mappingIndexUserId);
-      await client.excecute(mappingIndexMovieId)
-      console.log('index on mapping  created successfully!');
-    } catch (err) {
-      console.error('Error creating index on user table:', err);
-    }
-  }
-
-
-
-
-
-export {createMovies,createUsers,createMapping,createUserIndex,createMappingIndex};
+export {createMovies,createUsers,createUserIndex,createMappingIndex};
