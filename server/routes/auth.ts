@@ -13,7 +13,6 @@ export class authRoutes {
   }
 
   public setRoutes() {
-    this.router.get("/",verifyToken,  authController.getAllUsers);
     this.router.post("/register",  authController.register);
     this.router.post("/login", authController.login);
     this.router.post("/editUser/:id",verifyToken, upload.single('avatar'), authController.editUser)

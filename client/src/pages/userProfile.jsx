@@ -21,7 +21,13 @@ const ProfilePage = () => {
           const response = await fetch(`http://localhost:4000/user/${Cookies.get('userId')}`,{
             credentials:"include"
           });
-          const json = await response.json();
+          const resp = await response.json();
+          let json  = null;
+          if(resp.resp) json = resp.resp;
+          else{
+            console.log("couldnt get user");
+            return;
+          }
 
           // console.log(json.resp[0]);
           console.log(json);

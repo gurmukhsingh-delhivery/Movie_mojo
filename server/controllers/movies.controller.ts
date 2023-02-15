@@ -53,13 +53,20 @@ class MyController {
       else img = img + req.body.Images[i] + ",";
     }
 
+    const date = new Date(req.body.Released);
+    const newDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    console.log(newDate);
+
+    // const releaseDate = `${dateArray[2]}${`${mappingMonths[dateArray[1] || 'Jan']}`}${dateArray[0]}`;
+    // console.log("while posting a new movie release date is",releaseDate);
+
     const queryPostMovie =
       "INSERT INTO newmovies (id,genre,img,released,title,writer,plot,imdb,awards,actors,director) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     const paramsPostMovie = [
       uid(),
       movie.Genre,
       img,
-      "2011-02-03",
+      newDate,
       movie.Title,
       movie.Writer,
       movie.Plot,

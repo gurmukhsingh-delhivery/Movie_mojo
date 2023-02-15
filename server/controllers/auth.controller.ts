@@ -4,6 +4,7 @@ import {uid} from "uid";
 import {hashPassword,validatePassword,generateToken,verifyToken} from "../utils/authFxns";
 import path from "path"
 import { clientUrl } from '../constants/clientDetails';
+import { serverResponse, response } from "../utils/serverResponse";
 
 
 const client = getConnection();
@@ -13,24 +14,32 @@ class authController {
     const user = req.body;
 
     // console.log(req.body)
-    const query =
+    const queryRegisterUser =
       "INSERT INTO users (id, dob, password, name,email) VALUES (?, ?, ?, ?,?)";
-    const params = [id, user.dob, user.password, user.name, user.email];
+    const paramsRegisterUser = [id, user.dob, user.password, user.name, user.email];
 
-    const query2 = "SELECT * FROM USERS WHERE EMAIL = ?";
-    const params2 = [user.email];
+    const querySelectUserWithEmail = "SELECT * FROM USERS WHERE EMAIL = ?";
+    const paramsSelectUserWithEmail = [user.email];
 
     try {
       await client.connect();
       // console.log("connected to database");
-      const users = await client.execute(query2, params2, { prepare: true });
+      const users = await client.execute(querySelectUserWithEmail, paramsSelectUserWithEmail, { prepare: true });
 
       // console.log("here is the list of users with the email inputted")
       // console.log(users.rows);
 
       // see if a user with the same email already exists
-      if (users.rows.length > 0)
-        return res.status(200).send("user already exists");
+      if (users.rows.length > 0){ 
+        // return res.status(200).send("user already exists");
+
+        let obj:serverResponse = new response(true,"user already exists",false);
+        let objStr = JSON.stringify(obj);
+
+        return res.send(objStr);
+
+      }
+       
 
       // console.log(user.password);
 
@@ -38,27 +47,34 @@ class authController {
       const hashedPassword = await hashPassword(user.password);
 
       console.log(user.password, hashedPassword);
-      const newParams = [...params];
-      newParams[2] = hashedPassword;
+      const newParamsRegisterUser = [...paramsRegisterUser];
+      newParamsRegisterUser[2] = hashedPassword;
 
-      const resp = client.execute(query, newParams, { prepare: true });
-      res.status(200).send("registered the user in the database");
+      const respRegisterUser = client.execute(queryRegisterUser, newParamsRegisterUser, { prepare: true });
+      let obj:serverResponse = new response(true,respRegisterUser,null);
+      let objStr = JSON.stringify(obj);
+
+      res.send(objStr);
     } catch (err) {
-      res.status(200).send("not able to register");
+      let obj:serverResponse = new response(true,null,"not able to register");
+      let objStr = JSON.stringify(obj);
+
+      res.send(objStr);
+      // res.status(200).send("not able to register");
     }
   }
 
   public static async login(req: Request, res: Response) {
     console.log("got to the login route");
     const { email, password } = req.body;
-    const query = "SELECT * FROM USERS WHERE email = ?";
-    const params = [email];
+    const querySelectUserWithEmail = "SELECT * FROM USERS WHERE email = ?";
+    const paramsSelectUserWithEmail = [email];
 
     console.log(req.body);
 
     try {
       await client.connect();
-      const resp = await client.execute(query, params, { prepare: true });
+      const resp = await client.execute(querySelectUserWithEmail, paramsSelectUserWithEmail, { prepare: true });
 
       if (resp.rows.length == 0) return res.status(400).send("wrong email");
 
@@ -92,32 +108,29 @@ class authController {
     res.redirect(clientUrl);
   }
 
-  public static async getAllUsers(req: Request, res: Response) {
-    client.connect()
-    .then(() => client.execute('SELECT * FROM movies'))
-    .then(result => {
-      res.send(result.rows);
-    })
-    .catch(err => {
-      res.send(err)
-    });
-  }
-
   public static async getUser(req: Request, res: Response) {
     const id  = req.params.id;
 
-    const query = 'SELECT * FROM users WHERE id = ?';
-    const params = [id];
+    const queryGetUserWithId  = 'SELECT * FROM users WHERE id = ?';
+    const paramsGetUserWithId = [id];
 
 
-    client.connect()
-    .then(() => client.execute(query,params,{prepare: true}))
-    .then(resp => {
-        res.send(resp.rows);
-    })
-    .catch(err => {
-        res.send(err)
-    });
+     try{
+        await client.connect();
+        const respGetUserWithId = await client.execute(queryGetUserWithId,paramsGetUserWithId,{prepare: true});
+        // res.send(respGetUserWithId.rows);
+
+        let obj:serverResponse = new response(true,respGetUserWithId.rows,null);
+        let objStr = JSON.stringify(obj);
+
+        res.send(objStr);
+     }
+     catch(error){
+        let obj:serverResponse = new response(true,null,error);
+        let objStr = JSON.stringify(obj);
+        res.send(objStr);
+        // res.send(error)
+     }
   }
 
 
@@ -142,7 +155,11 @@ class authController {
         res.redirect(`${clientUrl}/userProfile`)
     }
     catch(error){
-          res.send(error);
+          let obj:serverResponse = new response(true,null,error);
+          let objStr = JSON.stringify(obj);
+
+          res.send(objStr);
+          // res.send(error);
     }
   }
 }
