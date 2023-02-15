@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getConnection } from '../db/connection';
-import {nanoid} from 'nanoid';
+import {uid} from "uid";
 import {hashPassword,validatePassword,generateToken,verifyToken} from "../utils/authFxns";
 import path from "path"
 import { clientUrl } from '../constants/clientDetails';
@@ -9,7 +9,7 @@ import { clientUrl } from '../constants/clientDetails';
 const client = getConnection();
 class authController {
   public static async register(req: Request, res: Response) {
-    const id = nanoid();
+    const id = uid();
     const user = req.body;
 
     // console.log(req.body)

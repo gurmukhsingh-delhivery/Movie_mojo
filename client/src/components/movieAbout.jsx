@@ -20,7 +20,11 @@ const MovieAbout = ({id})=>{
             const response = await fetch(`${serverUrl}movies/` + `${id}`,{
                 credentials:"include"
             });
-            const json = await response.json();
+            let json = await response.json();
+            // const json = await resp.json();
+
+            // console.log("movieAbout ", json);
+
          
             if(json.resp){
                     setMovie(json.resp[0]);
@@ -38,7 +42,11 @@ const MovieAbout = ({id})=>{
                         body: JSON.stringify(obj),
                     });
                     
-                    const colorData = await res.json();
+                    const colorResponse = await res.json();
+                    let colorData = null;
+                    if(colorResponse.resp) colorData = colorResponse.resp;
+                    else colorData = {value: 0};
+
                     console.log(colorData);
                     if(colorData.value == 1){
                       setUpvoteColor("green");
@@ -125,66 +133,6 @@ const MovieAbout = ({id})=>{
     }
 
     return (
-      // <div>
-      //     <h1 classNameName="text-2xl font-medium mb-2">{movie.title}</h1>
-      //     <p classNameName="text-gray-700">{movie.genre}</p>
-      //     <img src = {movie.img} />
-      //     {/* <h1>hello</h1> */}
-      // </div>
-
-      // <body className="grid grid-cols-3 bg-gray-200">
-      //   <div className="h-4/5 w-full mx-6">
-      //     <div className="flex h-full bg-white">
-      //       <div className="w-2/3">
-      //         <img
-      //           src={imageList[0]}
-      //           alt="Image"
-      //           className="rounded-lg h-full w-full object-fill"
-      //         />
-      //       </div>
-      //       <div className="w-2/3 px-6 py-4">
-      //         <h3 className="text-xl font-bold mb-2">{movie.title}</h3>
-      //         <p className="text-gray-700 mb-4">
-      //          {movie.plot} 
-      //         </p>
-      //         <ul className="list-none">
-                // <li className="mb-2">
-                //   <span className="font-bold">Genre:</span> {movie.genre}
-                // </li>
-                // <li className="mb-2">
-                //   <span className="font-bold">releaseDate:</span>{" "}
-                //   {movie.released}
-                // </li>
-                // <li className="mb-2">
-                //   <span className="font-bold">Actors:</span>{" "}
-                //   {movie.actors}
-                // </li>
-
-                // <li className="mb-2">
-                //   <span className="font-bold">Director:</span>{" "}
-                //   {movie.director}
-                // </li>
-
-                // <li className="mb-2">
-                //   <span className="font-bold">Awards:</span>{" "}
-                //   {movie.awards}
-                // </li>
-      //         </ul>
-
-              // <div id = "ratings" className='mt-8'>
-              //       <p className="rating inline">Rate this post: </p>
-              //       <div className="rating inline">
-              //           <i className="fa-solid fa-thumbs-up mx-4 fa-xl" style={{color: upvoteColor}} id='upvote' onClick={handleClick}></i>
-              //           <i className="fa-solid fa-thumbs-down mx-4 fa-xl" style={{color: downvoteColor}} id = "downvote" onClick={handleClick}></i>
-              //       </div>
-                   
-                  
-              // </div>
-      //       </div>
-      //     </div>
-      //   </div>
-      // </body>
-
 
        <section className='grid lg:grid-cols-3 gap-5 p-20'>
 
