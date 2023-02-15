@@ -12,8 +12,8 @@ class MyController {
    
     try {
       await client.connect();
-      const result = await client.execute("SELECT * FROM newmovies");
-      let obj: serverResponse = new response(true, result.rows, null);
+      const respAllMovies = await client.execute("SELECT * FROM newmovies");
+      let obj: serverResponse = new response(true, respAllMovies.rows, null);
 
       let objStr = JSON.stringify(obj);
       res.send(objStr);
@@ -27,13 +27,13 @@ class MyController {
   public static async get(req: Request, res: Response) {
     const id = req.params.id;
 
-    const query = "SELECT * FROM newmovies WHERE id = ?";
-    const params = [id];
+    const queryGetMovieWithId = "SELECT * FROM newmovies WHERE id = ?";
+    const paramsGetMovieWithId = [id];
 
     try {
       await client.connect();
-      let resp = await client.execute(query, params, { prepare: true });
-      let obj: serverResponse = new response(true, resp.rows, null);
+      let respGetMovieWithId = await client.execute(queryGetMovieWithId, paramsGetMovieWithId, { prepare: true });
+      let obj: serverResponse = new response(true, respGetMovieWithId.rows, null);
       let objStr = JSON.stringify(obj);
       res.send(objStr);
     } catch (error) {
@@ -53,9 +53,9 @@ class MyController {
       else img = img + req.body.Images[i] + ",";
     }
 
-    const query =
+    const queryPostMovie =
       "INSERT INTO newmovies (id,genre,img,released,title,writer,plot,imdb,awards,actors,director) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-    const params = [
+    const paramsPostMovie = [
       uid(),
       movie.Genre,
       img,
@@ -72,8 +72,8 @@ class MyController {
    
     try {
       await client.connect();
-      let resp = await client.execute(query, params, { prepare: true });
-      let obj: serverResponse = new response(true, resp, null);
+      let respPostMovie = await client.execute(queryPostMovie, paramsPostMovie, { prepare: true });
+      let obj: serverResponse = new response(true, respPostMovie, null);
       let objStr = JSON.stringify(obj);
 
       res.send(objStr);
@@ -87,13 +87,13 @@ class MyController {
   public static async deleteMovie(req: Request, res: Response) {
     const id = req.params.id;
 
-    const query = "DELETE FROM newmovies WHERE id = ?";
-    const params = [id];
+    const queryDeleteMovieWithId = "DELETE FROM newmovies WHERE id = ?";
+    const paramsDeleteMovieWithId = [id];
 
     try {
       await client.connect();
-      let resp = await client.execute(query, params, { prepare: true });
-      let obj: serverResponse = new response(true, resp, null);
+      let respDeleteMovie = await client.execute(queryDeleteMovieWithId, paramsDeleteMovieWithId, { prepare: true });
+      let obj: serverResponse = new response(true, respDeleteMovie, null);
       let objStr = JSON.stringify(obj);
 
       res.send(objStr);
@@ -133,14 +133,14 @@ class MyController {
       await client.connect();
       console.log("here");
 
-      const resp2 = await client.execute(
+      const respDeleteMapping = await client.execute(
         queryDeleteMapping,
         paramsDeleteMapping,
         { prepare: true }
       );
 
       // then create a new mapping for a rating
-      const resp3 = await client.execute(
+      const respInsertMapping = await client.execute(
         queryInsertMapping,
         paramsInsertMapping,
         { prepare: true }
@@ -148,12 +148,12 @@ class MyController {
       console.log("created entry in mapping");
 
       //this is to get the sum of rating for a given movie
-      const resp4 = await client.execute(
+      const respCalculateMapping = await client.execute(
         queryCalculateRating,
         paramsCalculateRating,
         { prepare: true }
       );
-      const rating = resp4.rows[0].rating;
+      const rating = respCalculateMapping.rows[0].rating;
 
       console.log(rating);
 
@@ -181,14 +181,14 @@ class MyController {
 
   public static async getUserRating(req: Request, res: Response) {
     // console.log("here in getUserRating");
-    const query1 = "select * from mapping where userid = ? and movieid = ?";
-    const params1 = [req.body.userId, req.body.movieId];
+    const queryGetMapping = "select * from mapping where userid = ? and movieid = ?";
+    const paramsGetMapping = [req.body.userId, req.body.movieId];
 
     try {
-      const resp1 = await client.execute(query1, params1, { prepare: true });
+      const respGetMapping = await client.execute(queryGetMapping, paramsGetMapping, { prepare: true });
 
      
-      let valObj = {value: resp1.rows[0].rating};
+      let valObj = {value: respGetMapping.rows[0].rating};
       let obj:serverResponse = new response(true,valObj,null);
       let objStr = JSON.stringify(obj);
 
