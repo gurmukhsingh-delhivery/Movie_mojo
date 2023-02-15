@@ -55,18 +55,10 @@ const ProfilePage = () => {
   return (
     <div class="h-screen bg-gray-200  dark:bg-gray-800   flex flex-wrap items-center  justify-center  ">
       <div class="container lg:w-2/6 xl:w-2/7 sm:w-full md:w-2/3    bg-white  shadow-lg    transform   duration-200 easy-in-out">
-        <div class=" h-32 overflow-hidden">
-          <img
-            class="w-full"
-            src="https://images.unsplash.com/photo-1605379399642-870262d3d051?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
-            alt=""
-            
-          />
-        </div>
-        <div class="flex justify-center px-5  -mt-12">
+            <div className="grid grid-cols-2">
 
-        {isEditable? 
-                        <form id = "theForm" enctype="multipart/form-data" action= {`http://localhost:4000/user/editUser/${userDetail.id}`} className= "mt-20" method="POST">
+                <div className=" profileImage col-span-1">
+                      {isEditable ? <form id = "theForm" enctype="multipart/form-data" action= {`http://localhost:4000/user/editUser/${userDetail.id}`} className= "mt-20" method="POST">
                             <input type="file" name="avatar"/>
                             <input
                                 type="text"
@@ -78,34 +70,34 @@ const ProfilePage = () => {
 
                              <input type="hidden" name="user" value={JSON.stringify(userDetail)} required />
                         </form>
-               :
-
-               <div>
-                      <img
-                          class="h-32 w-32 bg-white p-2 rounded-full   "
+                        
+                        :
+                        <img
+                          class=" bg-white p-2 "
                           src={`http://localhost:4000/${userDetail.avatar}`}
                           alt=""
                         />
+                    }
+                </div>
+                <div className="details">
+                       {isEditable? null
+                       :
 
-                      <h2 style={{marginLeft: "15px"}}>Name: {name}</h2>
-               </div> 
-            }
+                       <h2 style={{marginLeft: "15px"}}>Name: {name}</h2>
+                       }
 
-               
-          
-        </div>
-        <div class=" ">
-          <div className="text-center">
+                        <div className="text-center">
 
-            <h5  >Email : {userDetail.email}</h5>
-            <h5 style={{marginLeft: "-20px"}} >Date of birth : {userDetail.dob}   </h5>
-            
-            <button className="w-32 mt-4  text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"  onClick={handleEditClick}>
-            {isEditable ? "Save" : "Edit"}
-          </button>
-          </div>
-          <hr class="mt-6" />
-        </div>
+                            <h5  >Email : {userDetail.email}</h5>
+                            <h5 style={{marginLeft: "-20px"}} >Date of birth : {userDetail.dob}   </h5>
+
+                            <button className="w-32 mt-4  text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"  onClick={handleEditClick}>
+                            {isEditable ? "Save" : "Edit"}
+                            </button>
+                        </div>
+                </div>
+
+            </div>
       </div>
     </div>
   );

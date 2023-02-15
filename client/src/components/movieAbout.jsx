@@ -132,43 +132,95 @@ const MovieAbout = ({id})=>{
       //     {/* <h1>hello</h1> */}
       // </div>
 
-      <body className="flex items-center h-screen bg-gray-200">
-        <div className="h-4/5 w-full mx-6">
-          <div className="flex h-full bg-white">
-            <div className="w-2/3">
-              <img
+      // <body className="grid grid-cols-3 bg-gray-200">
+      //   <div className="h-4/5 w-full mx-6">
+      //     <div className="flex h-full bg-white">
+      //       <div className="w-2/3">
+      //         <img
+      //           src={imageList[0]}
+      //           alt="Image"
+      //           className="rounded-lg h-full w-full object-fill"
+      //         />
+      //       </div>
+      //       <div className="w-2/3 px-6 py-4">
+      //         <h3 className="text-xl font-bold mb-2">{movie.title}</h3>
+      //         <p className="text-gray-700 mb-4">
+      //          {movie.plot} 
+      //         </p>
+      //         <ul className="list-none">
+                // <li className="mb-2">
+                //   <span className="font-bold">Genre:</span> {movie.genre}
+                // </li>
+                // <li className="mb-2">
+                //   <span className="font-bold">releaseDate:</span>{" "}
+                //   {movie.released}
+                // </li>
+                // <li className="mb-2">
+                //   <span className="font-bold">Actors:</span>{" "}
+                //   {movie.actors}
+                // </li>
+
+                // <li className="mb-2">
+                //   <span className="font-bold">Director:</span>{" "}
+                //   {movie.director}
+                // </li>
+
+                // <li className="mb-2">
+                //   <span className="font-bold">Awards:</span>{" "}
+                //   {movie.awards}
+                // </li>
+      //         </ul>
+
+              // <div id = "ratings" className='mt-8'>
+              //       <p className="rating inline">Rate this post: </p>
+              //       <div className="rating inline">
+              //           <i className="fa-solid fa-thumbs-up mx-4 fa-xl" style={{color: upvoteColor}} id='upvote' onClick={handleClick}></i>
+              //           <i className="fa-solid fa-thumbs-down mx-4 fa-xl" style={{color: downvoteColor}} id = "downvote" onClick={handleClick}></i>
+              //       </div>
+                   
+                  
+              // </div>
+      //       </div>
+      //     </div>
+      //   </div>
+      // </body>
+
+
+       <section className='grid lg:grid-cols-3 gap-5 p-20'>
+
+         <div className="img lg:col-span-2">
+         <img
                 src={imageList[0]}
                 alt="Image"
                 className="rounded-lg h-full w-full object-fill"
               />
-            </div>
-            <div className="w-2/3 px-6 py-4">
-              <h3 className="text-xl font-bold mb-2">{movie.title}</h3>
-              <p className="text-gray-700 mb-4">
-               {movie.plot} 
-              </p>
-              <ul className="list-none">
-                <li className="mb-2">
-                  <span className="font-bold">Genre:</span> {movie.genre}
-                </li>
-                <li className="mb-2">
-                  <span className="font-bold">releaseDate:</span>{" "}
-                  {movie.released}
-                </li>
-                <li className="mb-2">
-                  <span className="font-bold">Actors:</span>{" "}
-                  {movie.actors}
-                </li>
+         </div>
 
-                <li className="mb-2">
-                  <span className="font-bold">Director:</span>{" "}
-                  {movie.director}
-                </li>
+         <div className="content lg:col-span-1 bg-white">
+            <h3 className="text-xl font-bold mb-2">{movie.title}</h3>
+                  <p className="text-gray-700 mb-4"> {movie.plot} </p>
+              <ul className="list">
+                  <li className="mb-2">
+                      <span className="font-bold">Genre:</span> {movie.genre}
+                    </li>
+                    <li className="mb-2">
+                      <span className="font-bold">releaseDate:</span>{" "}
+                      {movie.released}
+                    </li>
+                    <li className="mb-2">
+                      <span className="font-bold">Actors:</span>{" "}
+                      {movie.actors}
+                    </li>
 
-                <li className="mb-2">
-                  <span className="font-bold">Awards:</span>{" "}
-                  {movie.awards}
-                </li>
+                    <li className="mb-2">
+                      <span className="font-bold">Director:</span>{" "}
+                      {movie.director}
+                    </li>
+
+                    <li className="mb-2">
+                      <span className="font-bold">Awards:</span>{" "}
+                      {movie.awards}
+                    </li>
               </ul>
 
               <div id = "ratings" className='mt-8'>
@@ -180,10 +232,9 @@ const MovieAbout = ({id})=>{
                    
                   
               </div>
-            </div>
-          </div>
-        </div>
-      </body>
+         </div>
+           
+       </section>
     );
 
 }
