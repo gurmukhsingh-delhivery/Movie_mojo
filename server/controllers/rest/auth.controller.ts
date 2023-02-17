@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { getConnection } from '../db/connection';
+import { getConnection } from '../../db/connection';
 import {uid} from "uid";
-import {hashPassword,validatePassword,generateToken,verifyToken} from "../utils/authFxns";
+import {hashPassword,validatePassword,generateToken,verifyToken} from "../../utils/authFxns";
 import path from "path"
-import { clientUrl } from '../constants/clientDetails';
-import { serverResponse, response } from "../utils/serverResponse";
+import { clientUrl } from '../../constants/clientDetails';
+import { serverResponse, response } from "../../utils/serverResponse";
 
 
 const client = getConnection();
@@ -33,7 +33,7 @@ class authController {
       if (users.rows.length > 0){ 
         // return res.status(200).send("user already exists");
 
-        let obj:serverResponse = new response(true,"user already exists",false);
+        let obj:serverResponse = new response(false,"user already exists",false);
         let objStr = JSON.stringify(obj);
 
         return res.send(objStr);
@@ -56,7 +56,7 @@ class authController {
 
       res.send(objStr);
     } catch (err) {
-      let obj:serverResponse = new response(true,null,"not able to register");
+      let obj:serverResponse = new response(false,null,"not able to register");
       let objStr = JSON.stringify(obj);
 
       res.send(objStr);
@@ -76,14 +76,25 @@ class authController {
       await client.connect();
       const resp = await client.execute(querySelectUserWithEmail, paramsSelectUserWithEmail, { prepare: true });
 
-      if (resp.rows.length == 0) return res.status(400).send("wrong email");
+      if (resp.rows.length == 0){
+        let obj:serverResponse = new response(false,null,"wrong email");
+        let objStr = JSON.stringify(obj);
+  
+        res.send(objStr);
+        
+      }
 
       const comparePassword = await validatePassword(
         password,
         resp.rows[0].password
       );
-      if (comparePassword == false)
-        return res.status(400).send("wrong password");
+      if (comparePassword == false){
+        let obj:serverResponse = new response(false,null,"wrong password");
+        let objStr = JSON.stringify(obj);
+  
+        res.send(objStr);
+      }
+        
 
       const token = generateToken({ email: email, password: password });
       console.log("token is  ", token);

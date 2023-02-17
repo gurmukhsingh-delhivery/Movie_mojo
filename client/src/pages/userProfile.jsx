@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { serverUrl } from '../../constants/serverDetails';
 
-import "tailwindcss/base.css";
-import "tailwindcss/components.css";
-import "tailwindcss/utilities.css";
+// import "tailwindcss/base.css";
+// import "tailwindcss/components.css";
+// import "tailwindcss/utilities.css";
 
 const ProfilePage = () => {
 
@@ -18,7 +19,7 @@ const ProfilePage = () => {
 
   useEffect(() =>{
         const fetchData = async () => {
-          const response = await fetch(`http://localhost:4000/user/${Cookies.get('userId')}`,{
+          const response = await fetch(`${serverUrl}user/${Cookies.get('userId')}`,{
             credentials:"include"
           });
           const resp = await response.json();
@@ -72,7 +73,7 @@ const ProfilePage = () => {
         <div class="flex justify-center px-5  -mt-12">
 
         {isEditable? 
-                        <form id = "theForm" enctype="multipart/form-data" action= {`http://localhost:4000/user/editUser/${userDetail.id}`} className= "mt-20" method="POST">
+                        <form id = "theForm" enctype="multipart/form-data" action= {`${serverUrl}user/editUser/${userDetail.id}`} className= "mt-20" method="POST">
                             <input type="file" name="avatar"/>
                             <input
                                 type="text"
@@ -93,7 +94,7 @@ const ProfilePage = () => {
                           alt=""
                         />
 
-                      <h2 style={{marginLeft: "15px"}}>Name: {name}</h2>
+                      <h2 style={{marginLeft: "-38px"}}>Name: {name}</h2>
                </div> 
             }
 

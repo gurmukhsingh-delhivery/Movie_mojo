@@ -23,8 +23,8 @@ const Movie = ({movie}) => {
             
             <div className="flex justify-center my-8 h-full">
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                  <img className="rounded-t-lg" src={img} alt=""/>
+                <a href="#!" className='lg:h-1/2 inline-block' data-mdb-ripple="true" data-mdb-ripple-color="light">
+                  <img className="rounded-t-lg h-full w-full" src={img} alt=""/>
                 </a>
                 <div className="p-6">
                   <h5 className="text-gray-900 text-xl font-medium mb-2">{title}</h5>

@@ -9,7 +9,7 @@ import { serverUrl } from '../../constants/serverDetails';
 
 const  movieGrid = () => {
   const [data,setData] = useState(null);
-  const [sortAscending,setSortAscending] = useState(true);
+  const [sortAscending,setSortAscending] = useState(false);
   const router = useRouter();
   useEffect(() =>{
     console.log("use effect")

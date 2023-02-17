@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { getConnection } from "../db/connection";
+import { getConnection } from "../../db/connection";
 import {uid} from "uid";
 const fetch = require("node-fetch");
 
-import { serverResponse, response } from "../utils/serverResponse";
+import { serverResponse, response } from "../../utils/serverResponse";
 import { ServerResponse } from "http";
 const client = getConnection();
 
@@ -29,7 +29,7 @@ class MyController {
 
     const queryGetMovieWithId = "SELECT * FROM newmovies WHERE id = ?";
     const paramsGetMovieWithId = [id];
-
+   
     try {
       await client.connect();
       let respGetMovieWithId = await client.execute(queryGetMovieWithId, paramsGetMovieWithId, { prepare: true });
@@ -90,6 +90,7 @@ class MyController {
       res.send(objStr);
     }
   }
+  
 
   public static async deleteMovie(req: Request, res: Response) {
     const id = req.params.id;

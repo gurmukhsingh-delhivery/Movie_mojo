@@ -9,6 +9,11 @@ import * as dotEnv from "dotenv";
 import cookieParser from "cookie-parser"
 import path from "path"
 
+const { graphqlHTTP } = require('express-graphql');
+
+import {resolvers} from "./GraphQlUtils/resolver";
+import {schema} from "./GraphQlUtils/schema";
+
 import { clientUrl } from "./constants/clientDetails";
 
 
@@ -36,6 +41,12 @@ class App {
 
     this.app.use(express.static(path.join(__dirname,"/userProfile")))
     // console.log("in app.ts file" ,__dirname);
+
+    this.app.use('/graphql', graphqlHTTP({
+        schema: schema,
+        rootValue: resolvers,
+        graphiql: true
+  }));
     
     dotEnv.config();
   }

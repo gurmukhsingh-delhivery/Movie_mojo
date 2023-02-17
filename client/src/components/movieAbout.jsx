@@ -134,7 +134,7 @@ const MovieAbout = ({id})=>{
 
     return (
 
-       <section className='grid lg:grid-cols-3 gap-5 p-20'>
+       <section className='grid lg:grid-cols-3 gap-5 p-20 max-w-300px max-h-800px'>
 
          <div className="img lg:col-span-2">
          <img

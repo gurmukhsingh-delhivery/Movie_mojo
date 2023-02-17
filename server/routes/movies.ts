@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import movieController from "../controllers/movies.controller"
+import movieController from "../controllers/rest/movies.controller"
 import { verifyToken } from "../middleware/auth";
 
 export class movieRoutes {

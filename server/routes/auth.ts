@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import authController from "../controllers/auth.controller"
+import authController from "../controllers/rest/auth.controller"
 
 const multer  = require('multer')
 const upload = multer({ dest: './dist/userProfile/' })

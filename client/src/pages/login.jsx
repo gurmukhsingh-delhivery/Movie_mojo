@@ -2,14 +2,11 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { serverUrl } from '../../constants/serverDetails';
 
-import 'tailwindcss/base.css';
-import 'tailwindcss/components.css';
-import 'tailwindcss/utilities.css';
 
 const Login = ()=>{
     const router = useRouter();
     let {id} = router.query
-
+    console.log("login");
 
     return (
         <section class="bg-gray-50 dark:bg-gray-900">
